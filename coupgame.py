@@ -27,6 +27,13 @@ class CoupState:
         self.steal1_blocked = steal1_blocked
 
 class CoupGame:
+    def get_terminal_value(self, state):
+        if state.winner == 0:
+            return 1
+
+        if state.winner == 1:
+            return -1
+
     def current_player(self, state):
         if state.stage == "p0_action":
             return 0
@@ -414,13 +421,6 @@ class CoupGame:
                     steal0_blocked=state.steal0_blocked,
                     steal1_blocked=True
                 )
-
-    def get_terminal_value(self, state):
-        if state.winner == 0:
-            return 1
-
-        if state.winner == 1:
-            return -1
 
     def information_set(self, state):
         player = self.current_player(state)
