@@ -98,20 +98,27 @@ class MCCFR:
 
     def train(self, iterations):
         for _ in range(iterations):
-            """state = SkullState()
-            self.cfr(state,traverser=0)
-            
-            state = SkullState()
-            self.cfr(state,traverser=1)"""
-            state = CoupState(card0=random_card(),card1=random_card())
-            self.cfr(state,traverser=0)
+            if game_name == "Skull":
+                state = SkullState()
+                self.cfr(state,traverser=0)
+                
+                state = SkullState()
+                self.cfr(state,traverser=1)
+            elif game_name == "Coup":
+                state = CoupState(card0=random_card(),card1=random_card())
+                self.cfr(state,traverser=0)
 
-            state = CoupState(card0=random_card(),card1=random_card())
-            self.cfr(state,traverser=1)
+                state = CoupState(card0=random_card(),card1=random_card())
+                self.cfr(state,traverser=1)
+
+game_name = "Skull"
+#game_name = "Coup"
 
 def main():
-    #game = SkullGame()
-    game = CoupGame()
+    if game_name == "Skull":
+        game = SkullGame()
+    elif game_name == "Coup":
+        game = CoupGame()
     solver = MCCFR(game)
     solver.train(100000)
     print("Learned strategies:")
